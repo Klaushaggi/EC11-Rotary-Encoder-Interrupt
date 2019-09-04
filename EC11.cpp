@@ -35,12 +35,18 @@ void setup() {
   //digitalWrite(D2, HIGH); //turn pullup resistor on
   //digitalWrite(D3, HIGH); //turn pullup resistor on  
 
-  attachInterrupt(digitalPinToInterrupt(D2), handleInterrupt, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(D3), handleInterrupt, CHANGE);
+  //attachInterrupt(digitalPinToInterrupt(D2), handleInterrupt, CHANGE);
+  //attachInterrupt(digitalPinToInterrupt(D3), handleInterrupt, CHANGE);
+  attachInterrupt(D2, handleInterrupt, CHANGE);
+  attachInterrupt(D3, handleInterrupt, CHANGE);
 }
 
 void loop() {
+  if(encoderValue != lastencoderValue)
+  {
     Serial.print("Encoder: ");
-    Serial.println(encoderValue);
-    delay(1000);
+    Serial.println(encoderValue/4);
+    lastencoderValue=encoderValue;
+  }
+    delay(100);
 }
